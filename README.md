@@ -1,4 +1,5 @@
 # Routr AI
+[<img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion" width="45">](https://app.notion.com/p/Routr-AI-Documentation-78a20309b71e4461b79776f259396593?source=copy_link)
 
 Routr AI is a full-stack support triage SaaS platform built with:
 - Frontend: React + Vite + TypeScript + Tailwind CSS
