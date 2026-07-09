@@ -10,6 +10,7 @@ export default function Dashboard() {
 
   if (isLoading) return <div>Loading dashboard…</div>
   if (isError) return <div className="text-destructive">Failed to load dashboard: {(error as Error)?.message || 'Unknown error'}</div>
+  if (!data) return <div className="text-muted-foreground">No dashboard data available.</div>
 
   return (
     <div className="space-y-6">
