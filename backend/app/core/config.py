@@ -11,14 +11,18 @@ class Settings(BaseSettings):
     groq_model: str = "llama-3.3-70b-versatile"
     cors_origins: str = "*"
 
-    @property
-    def cors_origins_list(self) -> list[str]:
-        values = [o.strip() for o in self.cors_origins.split(",") if o.strip()]
-        return ["*"] if values == ["*"] else values
+    def normalize_origin(self, origin: str) -> str:
+        origin = origin.strip()
+        if origin == "*":
+            return origin
+        if origin.startswith("http://") or origin.startswith("https://"):
+            return origin
+        return f"https://{origin}"
 
     @property
-    def allow_credentials(self) -> bool:
-        return self.cors_origins.strip() != "*"
+    def cors_origins_list(self) -> list[str]:
+        values = [self.normalize_origin(o) for o in self.cors_origins.split(",") if o.strip()]
+        return ["*"] if not values or values == ["*"] else values
 
 
 settings = Settings()
