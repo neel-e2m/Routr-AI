@@ -386,7 +386,9 @@ sequenceDiagram
   - `SUPABASE_SERVICE_ROLE_KEY`
   - `GROQ_API_KEY`
   - `GROQ_MODEL` (optional, defaults to `llama-3.3-70b-versatile`)
-  - `CORS_ORIGINS` = your Vercel frontend URL, e.g. `https://your-frontend.vercel.app`
+  - `CORS_ORIGINS` = your Vercel frontend URL, e.g. `https://routr-ai.vercel.app`
+
+> Important: do not use `CORS_ORIGINS=*` when the frontend sends `Authorization` headers. Set the exact deployed frontend origin instead.
 
 ### Production checklist
 
