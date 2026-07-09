@@ -361,19 +361,40 @@ sequenceDiagram
 
 ## Deployment Notes
 
-- Frontend can be deployed to Vercel, Netlify, or any static host.
-- Backend can be deployed to a cloud VM, Heroku-style host, or Azure App Service.
-- Ensure environment variables are configured for production.
-- Use secure storage of Supabase service role keys and Groq API keys.
-- Set `CORS_ORIGINS` to your deployed frontend domain.
+### Frontend — Vercel
+
+- Create a Vercel project and connect the repo.
+- Set the project root to `frontend`.
+- Use the build command: `npm install && npm run build`.
+- Use the output directory: `dist`.
+- Add these environment variables in Vercel:
+  - `VITE_SUPABASE_URL` = your Supabase project URL
+  - `VITE_SUPABASE_ANON_KEY` = your Supabase anon key
+  - `VITE_API_URL` = your deployed backend URL (for example `https://your-backend.onrender.com`)
+- `frontend/vercel.json` is included to force client-side routing to `index.html`.
+
+### Backend — Render
+
+- Create a Render web service and connect the repo.
+- Use `render.yaml` at the repo root to configure the service.
+- Render will build the backend from the `backend` folder.
+- Build command: `pip install -r requirements.txt`.
+- Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`.
+- Set these environment variables in Render:
+  - `SUPABASE_URL`
+  - `SUPABASE_ANON_KEY`
+  - `SUPABASE_SERVICE_ROLE_KEY`
+  - `GROQ_API_KEY`
+  - `GROQ_MODEL` (optional, defaults to `llama-3.3-70b-versatile`)
+  - `CORS_ORIGINS` = your Vercel frontend URL, e.g. `https://your-frontend.vercel.app`
 
 ### Production checklist
 
-- Enable HTTPS for both frontend and backend
-- Use strong Supabase security policies
-- Rotate Supabase service role and anon keys if leaked
-- Monitor Groq usage and model costs
-- Add request validation or rate limiting if needed
+- Enable HTTPS for both frontend and backend.
+- Use strong Supabase security policies.
+- Rotate Supabase service role and anon keys if leaked.
+- Monitor Groq usage and model costs.
+- Add request validation or rate limiting if needed.
 
 ---
 
